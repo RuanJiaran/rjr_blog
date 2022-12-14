@@ -1,4 +1,4 @@
-# this / 箭头函数 / 普通函数
+# This 指向
 
 ## this 指向问题
 
@@ -38,22 +38,22 @@
   <script>
     // 'use strict'
 
-    console.log(this === window) //true
+    console.log(this === window); //true
 
-    var name = 'Jake'
-    console.log(this.name) // "Jake"
-    console.log(window.name) // "Jake"
+    var name = 'Jake';
+    console.log(this.name); // "Jake"
+    console.log(window.name); // "Jake"
 
-    age = 23 // 没有用 var,let,const 声明，在"use strict"模式下会报错
+    age = 23; // 没有用 var,let,const 声明，在"use strict"模式下会报错
     function testThis() {
-      age = 18
+      age = 18;
     }
-    console.log(this.age) // 23
-    testThis()
-    console.log(this.age) // 18
+    console.log(this.age); // 23
+    testThis();
+    console.log(this.age); // 18
 
-    acolor = 'red'
-    console.log(this) // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+    acolor = 'red';
+    console.log(this); // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
   </script>
 </html>
 ```
@@ -72,12 +72,12 @@
 ###### 示例 1
 
 ```js
-var name = 'windowsName'
+var name = 'windowsName';
 function sayName() {
-  var name = 'sayName'
-  console.log(this.name) // windowsName
+  var name = 'sayName';
+  console.log(this.name); // windowsName
 }
-sayName()
+sayName();
 ```
 
 ##### 这里有几个点我们需要特别注意下：
@@ -94,38 +94,38 @@ sayName()
 ###### 示例 2
 
 ```js
-var name = 'windowsName'
+var name = 'windowsName';
 function sayName() {
-  this.name = 'sayName'
+  this.name = 'sayName';
   this.say = function () {
-    console.log(this.name) // sayName
-    console.log(this) // sayName {name: "sayName", say: ƒ}
-  }
+    console.log(this.name); // sayName
+    console.log(this); // sayName {name: "sayName", say: ƒ}
+  };
 }
-const obj = new sayName()
-obj.say()
+const obj = new sayName();
+obj.say();
 ```
 
 ###### 示例 3
 
 ```js
 function foo() {
-  console.log(this.age)
+  console.log(this.age);
 }
 
 const obj1 = {
   age: 23,
   foo: foo,
-}
+};
 
 const obj2 = {
   age: 18,
   obj1: obj1,
   foo: foo,
-}
+};
 
-obj2.obj1.foo() // 23
-obj2.foo() // 18
+obj2.obj1.foo(); // 23
+obj2.foo(); // 18
 ```
 
 ## function 函数 和 var 变量提升优先级问题
@@ -148,25 +148,25 @@ fn() // undefined
 **案例二**
 
 ```js
-function a(){}
-var a
-console.log(typeof a) // function
+function a() {}
+var a;
+console.log(typeof a); // function
 ```
 
 **案例三**
 
 ```js
-function a(){}
-var a = 1
-console.log(typeof a) // number
+function a() {}
+var a = 1;
+console.log(typeof a); // number
 ```
 
 **案例四**
 
 ```js
-console.log(typeof a) // function
-function a(){}
-var a = 1
+console.log(typeof a); // function
+function a() {}
+var a = 1;
 ```
 
 ## 箭头函数的 this
@@ -178,16 +178,16 @@ var a = 1
 ###### 示例 1（在全局中）
 
 ```js
-window.objname = 'windowName'
+window.objname = 'windowName';
 let arrowFunc = () => {
-  console.log(this.objname)
-}
-arrowFunc() // windowName
+  console.log(this.objname);
+};
+arrowFunc(); // windowName
 let obj = {
   name: 'a',
   speak: arrowFunc,
-}
-obj.speak() // windowName
+};
+obj.speak(); // windowName
 ```
 
 解析：`arrowFunc` 定义所在的作用域是`全局作用域`，而全局的 `this` 指向 `window`，所以无论是直接调用（使用 window 调用）还是用对象 `obj` 调用，最终 `this` 都是 `window`
@@ -195,19 +195,19 @@ obj.speak() // windowName
 ###### 示例 2 （在对象属性中）
 
 ```js
-window.name = 'windowName'
+window.name = 'windowName';
 let obj1 = {
   name: 'obj1',
   speak1: () => {
-    console.log(this.name)
+    console.log(this.name);
   },
-}
+};
 let obj2 = {
   name: 'obj2',
   speak2: obj1.speak1,
-}
-obj1.speak1() // windowName
-obj2.speak2() // windowName
+};
+obj1.speak1(); // windowName
+obj2.speak2(); // windowName
 ```
 
 解析：箭头函数 `speak1` 定义在对象 `obj1` 中，但是对象 `obj1` 的 `this` 指向 `window`。所以无论是 `obj1` 调用还是 `obj2` 调用，最终 `this` 都是指向 `window`
@@ -221,21 +221,21 @@ obj2.speak2() // windowName
 ```js
 class Person {
   speak = () => {
-    console.log(this.name)
-  }
+    console.log(this.name);
+  };
 }
 
-let p = new Person()
-p.name = 'p'
+let p = new Person();
+p.name = 'p';
 
 let s = {
   name: 's',
-}
+};
 
-p.speak() // p
+p.speak(); // p
 
-s.speak = p.speak
-s.speak() // p
+s.speak = p.speak;
+s.speak(); // p
 ```
 
 解析：箭头函数 `speak` 定义在类 `Person` 中，`Person` 的 `this` 指向它的`实例化对象`，即`实例对象 p`。所以无论是使用 `p` 调用还是 `s` 调用，最终 `this` 都指向 `p`
@@ -249,46 +249,46 @@ s.speak() // p
 ###### 示例 1
 
 ```js
-window.name = 'windowName'
+window.name = 'windowName';
 let demo = {
   name: 'demo',
   speak1: function () {
-    console.log(this.name)
+    console.log(this.name);
   },
   speak2: () => {
-    console.log(this.name)
+    console.log(this.name);
   },
   speak3: function () {
     // 箭头函数定义在普通函数内部
     return (() => {
-      console.log(this.name)
-    })()
+      console.log(this.name);
+    })();
   },
-}
-demo.speak1() // demo
-demo.speak2() // windowName
-demo.speak3() // demo
+};
+demo.speak1(); // demo
+demo.speak2(); // windowName
+demo.speak3(); // demo
 ```
 
 ###### 示例 2
 
 ```js
-var a = 200
+var a = 200;
 
 let obj = {
   a: 100,
   fn: function () {
     // 普通函数谁调用，this指向谁
-    console.log(this.a)
+    console.log(this.a);
   },
   foo: () => {
     // 箭头函数的this指向定义所在作用域的this
-    console.log(this.a)
+    console.log(this.a);
   },
-}
+};
 
-obj.fn() // 100
-obj.foo() // 200
+obj.fn(); // 100
+obj.foo(); // 200
 ```
 
 ###### 示例 3（认真理解下）
@@ -298,11 +298,11 @@ const obj = {
   num: 10,
   hello: function () {
     setTimeout(() => {
-      console.log(this) // obj
-    })
+      console.log(this); // obj
+    });
   },
-}
-obj.hello()
+};
+obj.hello();
 ```
 
 `setTimeout` 里的箭头函数是声明在 `hello` 函数作用域内的 ，因此 `setTimeout` 内箭头函数的 `this` 指向 `hello` 的 `this` ，`hello` 是普通函数，被 `obj` 调用，所以 `hello` 的 `this` 指向 `obj`，因此 `setTimeout` 箭头函数内的 `thi`s 也指向 `obj`
@@ -310,30 +310,30 @@ obj.hello()
 ###### 示例 3 （这个例子认真体会下）
 
 ```js
-var name = 'windowName'
+var name = 'windowName';
 
 let obj = {
   name: 'obj',
   sayName: function () {
-    console.log(this.name)
+    console.log(this.name);
   },
   func1: function () {
     setTimeout(() => {
-      this.sayName()
-    }, 100)
+      this.sayName();
+    }, 100);
   },
   func2: function () {
     setTimeout(function () {
-      this.sayName()
-    }, 100)
+      this.sayName();
+    }, 100);
   },
   func3: () => {
-    this.sayName()
+    this.sayName();
   },
-}
-obj.func1() // obj
-obj.func2() // Uncaught TypeError: this.sayName is not a function
-obj.func3() // Uncaught TypeError: this.sayName is not a function
+};
+obj.func1(); // obj
+obj.func2(); // Uncaught TypeError: this.sayName is not a function
+obj.func3(); // Uncaught TypeError: this.sayName is not a function
 ```
 
 解析 1：重点分析下 `obj.func1()` 这个，可能有点绕，如果说的不对，欢迎指正。
@@ -377,24 +377,24 @@ new Foo{
 ###### 示例
 
 ```js
-var name = 'Jake'
+var name = 'Jake';
 function testThis() {
-  this.name = 'jakezhang'
+  this.name = 'jakezhang';
   this.sayName = function () {
-    return this.name
-  }
+    return this.name;
+  };
 }
-console.log(this.name) // Jake
+console.log(this.name); // Jake
 
-new testThis()
-console.log(this.name) // Jake
+new testThis();
+console.log(this.name); // Jake
 
-var result = new testThis()
-console.log(result.name) // jakezhang
-console.log(result.sayName()) // jakezhang
+var result = new testThis();
+console.log(result.name); // jakezhang
+console.log(result.sayName()); // jakezhang
 
-testThis()
-console.log(this.name) // jakezhang
+testThis();
+console.log(this.name); // jakezhang
 ```
 
 很显然，谁被 new 了，this 就指向谁
@@ -407,29 +407,29 @@ console.log(this.name) // jakezhang
 ```js
 class Hero {
   constructor(heroName) {
-    this.heroName = heroName
+    this.heroName = heroName;
   }
   dialogue() {
-    console.log(`I am ${this.heroName}`)
+    console.log(`I am ${this.heroName}`);
   }
 }
-const batman = new Hero('Batman')
-batman.dialogue()
+const batman = new Hero('Batman');
+batman.dialogue();
 ```
 
 构造函数里的 this 指向新创建的 类实例。当我们调用 batman.dialogue()时， dialogue()作为方法被调用， batman 是它的接收器。
 但是如果我们将 dialogue()方法的引用存储起来，并稍后将其作为函数调用，我们会丢失该方法的接收器，此时 this 参数指向 undefined
 
 ```js
-const say = batman.dialogue
-say()
+const say = batman.dialogue;
+say();
 ```
 
 出现错误的原因是 JavaScript 类是隐式的运行在严格模式下的。我们是在没有任何自动绑定的情况下调用 say()函数的。要解决这个问题，我们需要手动使用 bind()将 dialogue()函数与 batman 绑定在一起
 
 ```js
-const say = batman.dialogue.bind(batman)
-say()
+const say = batman.dialogue.bind(batman);
+say();
 ```
 
 ## 箭头函数其它特性
@@ -442,9 +442,9 @@ say()
 
 ```js
 let fun = () => {
-  console.log('我是箭头函数')
-}
-let funobj = new fun() // Uncaught TypeError: fun is not a constructor
+  console.log('我是箭头函数');
+};
+let funobj = new fun(); // Uncaught TypeError: fun is not a constructor
 ```
 
 #### 箭头函数内没有`arguments`，可以用展开运算符`...`解决
@@ -452,30 +452,30 @@ let funobj = new fun() // Uncaught TypeError: fun is not a constructor
 ```js
 // 普通函数使用 arguments
 function fun(params) {
-  console.log(arguments)
+  console.log(arguments);
 }
-fun(1, 2, 4) // [1, 2, 4, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+fun(1, 2, 4); // [1, 2, 4, callee: ƒ, Symbol(Symbol.iterator): ƒ]
 
 // 箭头函数使用 ... 运算符
 let arrowFun2 = (...params) => {
-  console.log(params)
-}
-arrowFun2(1, 2, 4) // [1, 2, 4]
+  console.log(params);
+};
+arrowFun2(1, 2, 4); // [1, 2, 4]
 
 // 箭头函数错误使用 arguments
-let arrowFun = params => {
-  console.log(arguments)
-}
-arrowFun(1, 2, 4) // Uncaught ReferenceError: arguments is not defined
+let arrowFun = (params) => {
+  console.log(arguments);
+};
+arrowFun(1, 2, 4); // Uncaught ReferenceError: arguments is not defined
 ```
 
 #### 箭头函数没有原型属性
 
 ```js
 let fun = () => {
-  console.log('我是箭头函数')
-}
-console.log(fun.prototype) // undefined
+  console.log('我是箭头函数');
+};
+console.log(fun.prototype); // undefined
 ```
 
 #### 箭头函数不能修改 this 指向
@@ -486,19 +486,19 @@ console.log(fun.prototype) // undefined
 let obj = {
   a: 10,
   b: function (n) {
-    let f = n => n + this.a
-    return f(n)
+    let f = (n) => n + this.a;
+    return f(n);
   },
   c: function (n) {
-    let f = n => n + this.a
+    let f = (n) => n + this.a;
     let m = {
       a: 20,
-    }
-    return f.call(m, n)
+    };
+    return f.call(m, n);
   },
-}
-console.log(obj.b(1)) // 11
-console.log(obj.c(1)) // 11
+};
+console.log(obj.b(1)); // 11
+console.log(obj.c(1)); // 11
 ```
 
 ## settimeout 回调函数的 this 问题
@@ -509,37 +509,33 @@ console.log(obj.c(1)) // 11
 
 #### 箭头函数
 
-
-
 **案例**
 
 ```js
-var name = 'windowName'
+var name = 'windowName';
 
 let obj = {
   name: 'obj',
   sayName: function () {
-    console.log(this.name)
+    console.log(this.name);
   },
   func1: function () {
     setTimeout(() => {
-      this.sayName()
-    }, 100)
+      this.sayName();
+    }, 100);
   },
   func2: function () {
     setTimeout(function () {
-      this.sayName()
-    }, 100)
+      this.sayName();
+    }, 100);
   },
   func3: () => {
-    this.sayName()
+    this.sayName();
   },
-}
-obj.func1() // obj
-obj.func2() // Uncaught TypeError: this.sayName is not a function
-obj.func3() // Uncaught TypeError: this.sayName is not a function
+};
+obj.func1(); // obj
+obj.func2(); // Uncaught TypeError: this.sayName is not a function
+obj.func3(); // Uncaught TypeError: this.sayName is not a function
 ```
-
-
 
 [好文](https://zhuanlan.zhihu.com/p/34368455)

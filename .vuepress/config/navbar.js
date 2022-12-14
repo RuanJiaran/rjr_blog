@@ -3,7 +3,7 @@ const navbar = [
     text: 'GO',
     children: [
       {
-        text: '学习笔记',
+        text: '心得笔记',
         link: '/docs/go/start/start.html',
       },
       {
@@ -24,8 +24,21 @@ const navbar = [
   },
   {
     text: 'JavaScript',
-    link: '/docs/js/core/eventloop.html',
-    activeMatch: '^/js/',
+    children: [
+      {
+        text: '心得笔记',
+        link: '/docs/js/core/eventloop.html',
+      },
+      {
+        text: '其它文档',
+        children: [
+          {
+            text: '菜鸟教程',
+            link: 'https://www.runoob.com/js/js-tutorial.html',
+          },
+        ],
+      },
+    ],
   },
   {
     text: 'Html/Css',

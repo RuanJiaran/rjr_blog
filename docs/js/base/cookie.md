@@ -1,4 +1,4 @@
-# Cookie/localStorage/sessionStorage
+# Cookie/Storage
 
 ## Cookie 概念
 

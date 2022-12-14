@@ -31,7 +31,7 @@ const routes = [
       ...getFileName('/go/base'),
     ])
   ),
-  // getSidebar('进阶', getFileName('/go/advanced')),
+  getSidebar('网络', uniq([...getFileName('/go/network')])),
 ];
 
 module.exports = routes;
