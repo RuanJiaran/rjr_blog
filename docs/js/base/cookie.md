@@ -24,7 +24,9 @@ _客户端请求服务器时，如果服务器需要记录该用户状态，服�
 
 比如：oa.tencent.com，hr.tencent.com，code.tencent.com 这几个域名的主域名都是 .tencent.com
 
-注意：只有主域名相同，浏览器在访问时才会携带对应的 cookie
+::: warning 注意
+只有主域名相同，浏览器在访问时才会携带对应的 cookie
+:::
 
 ## Cookie 缺点
 

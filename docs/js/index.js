@@ -17,7 +17,14 @@ const routes = [
   ),
   getSidebar(
     '基础',
-    uniq(['/docs/js/base/datatype', '/docs/js/base/typeof', '/docs/js/base/null', ...getFileName('/js/base')])
+    uniq([
+      '/docs/js/base/datatype',
+      '/docs/js/base/typeof',
+      '/docs/js/base/null',
+      '/docs/js/base/copy',
+      '/docs/js/base/map',
+      ...getFileName('/js/base'),
+    ])
   ),
   getSidebar('数组操作', getFileName('/js/array'), true),
   getSidebar('进阶', getFileName('/js/advanced'), true),
