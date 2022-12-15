@@ -1,13 +1,12 @@
-# 数据类型判断
+# 数据类型检测
 
 ## 总结
 
-- 基本数据类型：Number，String，Boolean，Symbol，BigInt，undefined 用 `typeof` 检测
-
-- 引用数据类型：Array，Object，Date，RegExp 用 `instanceof `检测
-- 引用数据类型 Function 可以同时用 `typeof` 和 `instanceof` 检测
-
 - null 用`===null` 检测
+- 引用数据类型 Function 可以同时用 `typeof` 和 `instanceof` 检测
+- 基本数据类型：Number，String，Boolean，Symbol，BigInt，undefined 用 `typeof` 检测
+- 引用数据类型：Array，Object，Date，RegExp 用 `instanceof `检测
+- 所有类型都可以用 constructor 属性和 toString() 方法来检测
 
 ## isArray 判断是否为数组
 
@@ -43,11 +42,15 @@ console.log(
 );
 ```
 
-> 基本数据类型中：Number，String，Boolean，undefined 以及引用数据类型中 Function ,可以使用 typeof 检测数据类型,分别返回对应的数据类型小写字符
+::: warning 注意
+typeof 能有效检测基本数据类型
 
-!>用 typeof 检测构造函数创建的 Number，String，Boolean 都返回 object
+基本数据类型中：null，及所有引用数据类型（除了 Function）不可以用 typeof 检测。都会返回小写的 object
 
-!>基本数据类型中：null 。引用数据类型中的：Array，Object，Date，RegExp。不可以用 typeof 检测。都会返回小写的 object
+null 属于特殊的引用类型返回 object,function 属于特殊引用类型类型不用于存储数据
+
+用 typeof 检测构造函数创建的 Number，String，Boolean，及其它数据类型都会返回 object
+:::
 
 ## instanceof
 
@@ -73,7 +76,13 @@ console.log(
 );
 ```
 
+::: danger 注意
+null 和 undefined 都返回了 false，这是因为它们的类型就是自己本身，并不是 Object 创建出来它们，所以返回了 false
+:::
+
+::: info
 基本数据类型中：Number，String，Boolean。字面量值不可以用 instanceof 检测，但是构造函数创建的值可以，如下：
+:::
 
 ```js
 console.log(
@@ -83,7 +92,33 @@ console.log(
 );
 ```
 
-!>还需要注意 null 和 undefined 都返回了 false，这是因为它们的类型就是自己本身，并不是 Object 创建出来它们，所以返回了 false
+## constructor
+
+constructor 属性返回所有 JavaScript 变量的构造函数。
+
+```js
+"John".constructor                 // 返回函数 String()  { [native code] }
+(3.14).constructor                 // 返回函数 Number()  { [native code] }
+false.constructor                  // 返回函数 Boolean() { [native code] }
+[1,2,3,4].constructor              // 返回函数 Array()   { [native code] }
+{name:'John', age:34}.constructor  // 返回函数 Object()  { [native code] }
+new Date().constructor             // 返回函数 Date()    { [native code] }
+function () {}.constructor         // 返回函数 Function(){ [native code] }
+```
+
+使用 constructor 判断数据类型
+
+```js
+// 判断数组
+function isArray(myArray) {
+  return myArray.constructor.toString().indexOf('Array') > -1;
+}
+
+// 判断日期
+function isDate(myDate) {
+  return myDate.constructor.toString().indexOf('Date') > -1;
+}
+```
 
 ## toString()
 
