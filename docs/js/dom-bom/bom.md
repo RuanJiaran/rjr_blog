@@ -32,6 +32,11 @@ window.document.getElementById("header") 与 document.getElementById("header") �
 - document.documentElement.clientHeight 或 document.body.clientHeight
 - document.documentElement.clientWidth 或 document.body.clientWidth
 
+:::info
+document.documentElement 返回对象为 Html 元素。
+document.documentElement 返回对象为 body 元素。
+:::
+
 兼容写法
 
 ```js
@@ -47,16 +52,20 @@ const h = window.innerHeight || document.documentElement.clientHeight || documen
 - window.moveTo() - 移动当前窗口
 - window.resizeTo() - 调整当前窗口的尺寸
 
+[window 其它属性](https://www.runoob.com/jsref/obj-window.html)
+
 ## window screen（屏幕对象）
 
 window.screen 对象在编写时可以不使用 window 这个前缀。
 
 ![image-20221216105206871](/img/image-20221216105206871.png)
 
-- screen.availWidth - 可用的屏幕宽度
-- screen.availHeight - 可用的屏幕高度
+- screen.availWidth - 可用的屏幕宽度（不包括 Windows 任务栏）
+- screen.availHeight - 可用的屏幕高度（不包括 Windows 任务栏）
 - screen.width - 屏幕宽度
 - screen.height - 屏幕高度
+
+[screen 其它属性](https://www.runoob.com/jsref/obj-screen.html)
 
 ## window navigator（浏览器对象）
 
@@ -64,13 +73,7 @@ window.navigator 对象在编写时可不使用 window 这个前缀。
 
 ![image-20221216110408605](/img/image-20221216110408605.png)
 
-- navigator.appCodeName - 浏览器代号
-- navigator.appName - 浏览器名称
-- navigator.appVersion - 浏览器版本
-- navigator.cookieEnabled - 启用 Cookies
-- navigator.platform - 硬件平台
-- navigator.userAgent - 用户代理
-- navigator.language - 用户代理语言
+[navigator 其它属性](https://www.runoob.com/jsref/obj-navigator.html)
 
 ## window history(历史对象）
 
@@ -81,6 +84,8 @@ window.history 对象在编写时可不使用 window 这个前缀。
 - history.go() - 前进或后退指定的页面数 history.go(num)，num 为负数表示后退，num 为 0 表示刷新页面
 - history.back() - 后退一页
 - history.forward() - 前进一页
+
+[history 其它属性](https://www.runoob.com/jsref/obj-history.html)
 
 ## window location (地址对象)
 
@@ -97,15 +102,15 @@ location.hostname -- 返回URL中的主域名部分，例如dreamdu.com
 location.pathname -- 返回URL的域名后的部分。例如 http://www.dreamdu.com/xhtml/ 返回/xhtml/
 location.port -- 返回URL中的端口部分。例如 http://www.dreamdu.com:8080/xhtml/ 返回8080
 location.protocol -- 返回URL中的协议部分。例如 http://www.dreamdu.com:8080/xhtml/ 返回(//)前面的内容http:
-location.assign() --  加载 URL 指定的新的 HTML 文档。 
+location.assign() --  加载 URL 指定的新的 HTML 文档。
 location.replace() -- 通过加载 URL 指定的文档来替换当前文档。
 location.reload() -- 重载当前页面
 ```
 
 ::: warning 注意
 
-location.assign() --  加载 URL 指定的新的 HTML 文档。 就相当于一个链接，跳转到指定的url，当前页面会转为新页面内容，**可以点击后退返回上一个页面**。
+location.assign() -- 加载 URL 指定的新的 HTML 文档。 就相当于一个链接，跳转到指定的 url，当前页面会转为新页面内容，**可以点击后退返回上一个页面**。
 
-location.replace() -- 通过加载 URL 指定的文档来替换当前文档，并且在history对象的地址列表中移除这个URL,这个方法是替换当前窗口页面，前后两个页面共用一个窗口，所以是**没有后退返回上一页的**
+location.replace() -- 通过加载 URL 指定的文档来替换当前文档，并且在 history 对象的地址列表中移除这个 URL,这个方法是替换当前窗口页面，前后两个页面共用一个窗口，所以是**没有后退返回上一页的**
 
 :::

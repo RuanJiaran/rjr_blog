@@ -39,31 +39,31 @@ typora-root-url: ..\..\.vuepress\public\img
 
 ```js
 // ajax请求代码示例
-console.log('start')
+console.log('start');
 $.get('./data1.json', function (data1) {
-  console.log(data1)
-})
-console.log('end')
+  console.log(data1);
+});
+console.log('end');
 ```
 
 ```js
 // img 加载示例
-console.log('start')
-const img = document.createElement('img')
+console.log('start');
+const img = document.createElement('img');
 img.onload = function () {
-  console.log('loaded')
-}
-img.src = 'xxx.png'
-console.log('end')
+  console.log('loaded');
+};
+img.src = 'xxx.png';
+console.log('end');
 ```
 
 ```js
 // 事件绑定示例
-console.log('start')
+console.log('start');
 document.getElementById('btn').addEventListener('click', function () {
-  alert('clicked')
-})
-console.log('end')
+  alert('clicked');
+});
+console.log('end');
 ```
 
 请求处理过程中，你不能闲着，会产生异步的请求，回头再处理，然后继续执行下面的请求
@@ -71,9 +71,9 @@ console.log('end')
 #### 同步阻塞示例
 
 ```js
-console.log(1000)
-alert(200)
-console.log(3000)
+console.log(1000);
+alert(200);
+console.log(3000);
 ```
 
 上面就是同步阻塞示例，你不点击 alert 确认窗口，不会打印 3000
@@ -134,24 +134,24 @@ microtask,可以理解是在当前 task 执行结束后立即执行的任务。�
 
 ```js
 // 主线程
-console.log(100)
+console.log(100);
 
 // 宏任务队列 1
 setTimeout(() => {
-  console.log(200)
-})
+  console.log(200);
+});
 
-new Promise(resolve => {
+new Promise((resolve) => {
   // 主线程
-  console.log(300)
-  resolve()
+  console.log(300);
+  resolve();
 }).then(() => {
   // 微任务队列 1
-  console.log(301)
-})
+  console.log(301);
+});
 
 // 主线程
-console.log(400)
+console.log(400);
 
 // 100,300,400,301,200
 ```
@@ -164,41 +164,41 @@ console.log(400)
 //第一轮 宏任务队列 1
 setTimeout(() => {
   //第二轮 主线程 1
-  console.log('timer_1')
+  console.log('timer_1');
 
   //第二轮 宏任务队列 1
   setTimeout(() => {
     // 第四轮 主线程 1
-    console.log('timer_3')
-    new Promise(resolve => {
+    console.log('timer_3');
+    new Promise((resolve) => {
       // 第四轮 主线程 2
-      resolve()
-      console.log('new promise2')
+      resolve();
+      console.log('new promise2');
     }).then(() => {
       // 第四轮 微任务队列
-      console.log('promise then2')
-    })
-  }, 0)
+      console.log('promise then2');
+    });
+  }, 0);
 
   // 第二轮 微任务 1
-  new Promise(resolve => {
+  new Promise((resolve) => {
     //第二轮 主线程 2
-    resolve()
-    console.log('new promise')
+    resolve();
+    console.log('new promise');
   }).then(() => {
     //第二轮 微任务队列 1
-    console.log('promise then')
-  })
-}, 0)
+    console.log('promise then');
+  });
+}, 0);
 
 //第一轮 宏任务队列 2
 setTimeout(() => {
   // 第三轮 主线程
-  console.log('timer_2')
-}, 0)
+  console.log('timer_2');
+}, 0);
 
 //第一轮 主线程
-console.log('========== Sync queue ==========')
+console.log('========== Sync queue ==========');
 
 // ========== Sync queue ==========
 // timer_1
@@ -213,26 +213,26 @@ console.log('========== Sync queue ==========')
 ###### 示例 3
 
 ```js
-let n = 0
+let n = 0;
 setTimeout(() => {
-  n++
-  new Promise(resolve => {
-    resolve()
+  n++;
+  new Promise((resolve) => {
+    resolve();
   }).then(() => {
-    console.log(n)
-  })
-}, 1000)
+    console.log(n);
+  });
+}, 1000);
 setTimeout(() => {
-  n++
-}, 1000)
+  n++;
+}, 1000);
 setTimeout(() => {
-  n++
-  new Promise(resolve => {
-    resolve()
+  n++;
+  new Promise((resolve) => {
+    resolve();
   }).then(() => {
-    console.log(n)
-  })
-}, 1000)
+    console.log(n);
+  });
+}, 1000);
 
 // 1
 // 3
@@ -242,49 +242,49 @@ setTimeout(() => {
 
 ```js
 //主线程直接执行
-console.log('1')
+console.log('1');
 
 //丢到宏事件队列中
 setTimeout(function () {
-  console.log('2')
+  console.log('2');
   process.nextTick(function () {
-    console.log('3')
-  })
+    console.log('3');
+  });
   new Promise(function (resolve) {
-    console.log('4')
-    resolve()
+    console.log('4');
+    resolve();
   }).then(function () {
-    console.log('5')
-  })
-})
+    console.log('5');
+  });
+});
 
 //微事件1
 process.nextTick(function () {
-  console.log('6')
-})
+  console.log('6');
+});
 
 new Promise(function (resolve) {
   //主线程直接执行
-  console.log('7')
-  resolve()
+  console.log('7');
+  resolve();
 }).then(function () {
   //微事件2
-  console.log('8')
-})
+  console.log('8');
+});
 
 //丢到宏事件队列中
 setTimeout(function () {
-  console.log('9')
+  console.log('9');
   process.nextTick(function () {
-    console.log('10')
-  })
+    console.log('10');
+  });
   new Promise(function (resolve) {
-    console.log('11')
-    resolve()
+    console.log('11');
+    resolve();
   }).then(function () {
-    console.log('12')
-  })
-})
+    console.log('12');
+  });
+});
 
 // 1，7，6，8，2，4，3，5，9，11，10，12
 ```

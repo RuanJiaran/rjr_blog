@@ -7,7 +7,7 @@ const { getSidebar, getFileName } = require('./utils');
 const { tsRoutes, jsRoutes, nestjsRoutes, reactRoutes, vue2Routes, goRoutes } = require('./config/routes');
 console.log(resolve(__dirname, 'public/img'));
 
-module.exports = {
+export default defineUserConfig({
   lang: 'zh-CN',
   title: '学习笔记',
   description: '个人学习笔记',
@@ -108,4 +108,4 @@ module.exports = {
     // },
   }),
   // debug: true,
-};
+});

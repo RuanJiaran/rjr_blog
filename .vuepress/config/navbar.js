@@ -13,6 +13,10 @@ const navbar = [
             text: '菜鸟教程',
             link: 'https://www.runoob.com/go/go-tutorial.html',
           },
+          {
+            text: 'Dom 事件对象',
+            link: 'https://www.runoob.com/jsref/dom-obj-event.html',
+          },
         ],
       },
     ],
