@@ -1,4 +1,4 @@
-# 事件级别/事件捕获/事件冒泡
+# 事件
 
 ## DOM 事件三种级别
 
@@ -24,7 +24,7 @@ DOM0 级事件分两种，一是直接在标签内直接添加执行语句，二
 第三个参数：指定冒泡还是捕获，默认是 false，冒泡
 
 ```js
-element.addEventListener('click', function () {}, false)
+element.addEventListener('click', function () {}, false);
 ```
 
 #### DOM3 级事件
@@ -32,7 +32,7 @@ element.addEventListener('click', function () {}, false)
 同 DOM2 级一样，只不过添加了更多的事件类型，鼠标事件、键盘事件。
 
 ```js
-element.addEventListener('keyup', function () {}, false)
+element.addEventListener('keyup', function () {}, false);
 ```
 
 ## DOM 事件两种类型

@@ -1,4 +1,4 @@
-# offset、client、scroll 区别
+# offset/client/scroll 区别
 
 ## offset
 

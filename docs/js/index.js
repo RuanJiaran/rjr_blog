@@ -28,6 +28,18 @@ const routes = [
   ),
   getSidebar('数组操作', getFileName('/js/array'), true),
   getSidebar('进阶', getFileName('/js/advanced'), true),
+  getSidebar(
+    'DOM&BOM',
+    uniq([
+      '/docs/js/dom-bom/dom',
+      '/docs/js/dom-bom/domevent',
+      '/docs/js/dom-bom/bom',
+      '/docs/js/dom-bom/offset-client-scroll',
+      '/docs/js/dom-bom/cookie',
+      '/docs/js/dom-bom/domrender',
+      ...getFileName('/js/dom-bom'),
+    ])
+  ),
   getSidebar('实践', getFileName('/js/pratice'), true),
   getSidebar('其它', getFileName('/js/other'), true),
 ];
