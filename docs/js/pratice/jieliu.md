@@ -2,7 +2,15 @@
 
 ## 节流
 
-一段时间内，只执行一次某个操作。过了这段时间，还有操作的话，继续执行新的操作。
+保证一个事件一定时间内只执行一次。过了这段时间，还有操作的话，继续执行操作。
+
+#### 应用场景
+
+- DOM 元素的拖拽（mousemove/drag），滑块（Slider）滑动和数值联动
+- 滚动事件（scroll），只要页面滚动就会间隔一段时间判断一次。（图片懒加载）
+- 计算鼠标移动的距离（mousemove）
+- mousedown / keydown/click 事件（单位时间只能请求一次接口）
+- 搜索联想（keyup）
 
 ```html
 <!DOCTYPE html>
@@ -57,23 +65,20 @@
 
   /**
    * 节流函数，是一个闭包
-   * @func 函数
+   * @fn函数
    * @delay 间隔执行时间
    */
-  function throttle(func, delay) {
-    let timer = 0
-    console.log(timer)
-    return function () {
-      const context = this
-      const args = arguments
-      const nowTime = Date.now()
-      console.log(nowTime - timer)
-      if (nowTime - timer > delay) {
-        func.apply(context, args) // 执行fn函数，并绑定fn的this和参数
-        timer = Date.now()
-      }
+    function throttle(fn, delay, scope) {
+        let prevTime = 0;
+        return function () {
+            const context = scope || this, args = arguments;
+            const nowTime = Date.now();
+            if (nowTime - prevTime > delay) {
+                prevTime = nowTime;
+                fn.apply(context, args);
+            }
+        }
     }
-  }
 </script>
 ```
 
@@ -83,7 +88,16 @@
 
 ## 防抖
 
-原理是维护一个定时器，将很多个相同的操作合并成一个。规定在 delay 后触发函数，如果在此之前触发函数，则取消之前的计时重新计时，只有最后一次操作能被触发
+把多个顺序的调用合并成一次（如果一个事件被频繁触发多次，并且触发的时间间隔过短，只执行最后触发的一次）。
+
+原理是维护一个定时器，规定在 delay 后触发函数，如果在此之前触发函数，则取消之前的计时重新计时，只有最后一次操作能被触发。
+
+#### 应用场景
+
+- 手机号，邮箱输入检测
+- 搜索框搜索输入（只需最后一次输入完后，再请求api接口），输入六位密码后自动提交。
+- 窗口大小 resize（只需窗口调整完成后，计算窗口大小，防止重复渲染）
+- 滚动事件（scroll），只需执行触发的最后一次滚动事件的处理程序。（是否滚动到底部自动加载更过）
 
 ```html
 <!DOCTYPE html>
@@ -112,21 +126,21 @@
    * @func 函数
    * @wait 等待执行时间
    */
-  function debounce(func, wait) {
-    let timer
-    return function () {
-      const context = this
-      const args = arguments
-
-      if (timer) {
-        clearTimeout(timer)
-      }
-
-      timer = setTimeout(function () {
-        func.apply(context, args) // 执行fn函数，并绑定fn的this和参数
-      }, wait)
+    function debounce(fn, delay, scope) {
+        let timer = null;
+        // 返回函数对debounce作用域形成闭包
+        return function () {
+            // setTimeout()中用到函数环境总是window,故需要当前环境的副本；
+            const context = scope || this, args = arguments;
+            // 如果事件被触发，清除timer并重新开始计时
+            if (timer) {
+                clearTimeout(timer)
+            }
+            timer = setTimeout(function () {
+                fn.apply(context, args);
+            }, delay);
+        }
     }
-  }
 </script>
 ```
 

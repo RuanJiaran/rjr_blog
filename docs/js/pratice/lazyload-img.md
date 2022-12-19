@@ -122,19 +122,17 @@ let io = new IntersectionObserver((entries) => {
 **完整示例**
 
 ```js
-const lazyImageObserver = new IntersectionObserver(lazyLoadImg);
-
-function lazyLoadImg(entries) {
-  for (let i of entries) {
-    if (i.isIntersecting) {
-      let img = i.target;
-      let trueSrc = img.getAttribute('data-src');
-      img.setAttribute('src', trueSrc);
-      // 对图片取消观察
-      lazyImageObserver.unobserve(img);
+const lazyImageObserver = new IntersectionObserver((entries,observer)=>{
+    for (let i of entries) {
+        if (i.isIntersecting) {
+            let img = i.target;
+            let src = img.getAttribute('data-src');
+            img.setAttribute('src', src);
+            // 对图片取消观察
+            observer.unobserve(img);
+        }
     }
-  }
-}
+});
 
 const images = document.getElementsByTagName('img');
 // 遍历所有图片
