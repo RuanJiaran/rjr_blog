@@ -4,7 +4,15 @@ import navbar from './config/navbar';
 import { resolve } from 'path';
 
 const { getSidebar, getFileName } = require('./utils');
-const { tsRoutes, jsRoutes, nestjsRoutes, reactRoutes, vue2Routes, goRoutes } = require('./config/routes');
+const {
+  tsRoutes,
+  jsRoutes,
+  nestjsRoutes,
+  reactRoutes,
+  vue2Routes,
+  goRoutes,
+  webpackRoutes,
+} = require('./config/routes');
 console.log(resolve(__dirname, 'public/img'));
 
 export default defineUserConfig({
@@ -33,7 +41,7 @@ export default defineUserConfig({
       '/docs/ts/': [...tsRoutes],
       '/docs/vue2/': [...vue2Routes],
       '/docs/react/': [...reactRoutes],
-      '/docs/webpack/': [getSidebar('Webpack', getFileName('/webpack'))],
+      '/docs/webpack/': [...webpackRoutes],
       '/docs/react-admin/': [getSidebar('ReactAdmin', getFileName('/react-admin'))],
       '/docs/nestjs/': [...nestjsRoutes],
       '/docs/http/': [getSidebar('HTTP', getFileName('/http'))],
