@@ -61,7 +61,7 @@ const navbar = [
   },
   {
     text: 'Webpack',
-    link: '/docs/webpack/webpack4-vue2.html',
+    link: '/docs/webpack/webpack4-vue2/init.html',
     activeMatch: '^/webpack/',
   },
   {
@@ -78,11 +78,6 @@ const navbar = [
     text: 'Http',
     link: '/docs/http/http-https.html',
     activeMatch: '^/http/',
-  },
-  {
-    text: 'ReactAdmin',
-    link: '/docs/react-admin/index.html',
-    activeMatch: '^/react-admin/',
   },
   {
     text: '其它',
@@ -192,6 +187,6 @@ const navbar = [
       },
     ],
   },
-];
+]
 
-export default navbar;
+export default navbar

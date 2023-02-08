@@ -1,9 +1,9 @@
-import { defineUserConfig } from 'vuepress';
-import recoTheme from 'vuepress-theme-reco';
-import navbar from './config/navbar';
-import { resolve } from 'path';
+import { defineUserConfig } from 'vuepress'
+import recoTheme from 'vuepress-theme-reco'
+import navbar from './config/navbar'
+import { resolve } from 'path'
 
-const { getSidebar, getFileName } = require('./utils');
+const { getSidebar, getFileName } = require('./utils')
 const {
   tsRoutes,
   jsRoutes,
@@ -12,13 +12,13 @@ const {
   vue2Routes,
   goRoutes,
   webpackRoutes,
-} = require('./config/routes');
-console.log(resolve(__dirname, 'public/img'));
+} = require('./config/routes')
+console.log(resolve(__dirname, 'public/img'))
 
 export default defineUserConfig({
   lang: 'zh-CN',
-  title: '学习笔记',
-  description: '个人学习笔记',
+  title: '007',
+  description: '007',
   base: '/rjr_blog/', //项目根路径
   dest: './dist', // 项目打包目录
   markdown: {
@@ -42,7 +42,6 @@ export default defineUserConfig({
       '/docs/vue2/': [...vue2Routes],
       '/docs/react/': [...reactRoutes],
       '/docs/webpack/': [...webpackRoutes],
-      '/docs/react-admin/': [getSidebar('ReactAdmin', getFileName('/react-admin'))],
       '/docs/nestjs/': [...nestjsRoutes],
       '/docs/http/': [getSidebar('HTTP', getFileName('/http'))],
       '/docs/html-css/': [getSidebar('HTML-CSS', getFileName('/html-css'))],
@@ -116,4 +115,4 @@ export default defineUserConfig({
     // },
   }),
   // debug: true,
-});
+})

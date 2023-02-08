@@ -1,4 +1,4 @@
-# webpack4 + vue2 从零开始搭建项目
+# 从零开始搭建
 
 ## 1. 创建项目文件夹
 
@@ -42,12 +42,12 @@ npm install -D clean-webpack-plugin@4 html-webpack-plugin@4 mini-css-extract-plu
 #### 5.1 创建 `webpack/utils.js` 文件
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const isDev = process.env.NODE_ENV === 'development';
-const isProd = process.env.NODE_ENV === 'production';
-const isAnalyz = process.env.analyz === 'true';
-const isSmp = process.env.SMP === 'true';
+const isDev = process.env.NODE_ENV === 'development'
+const isProd = process.env.NODE_ENV === 'production'
+const isAnalyz = process.env.analyz === 'true'
+const isSmp = process.env.SMP === 'true'
 
 const getStyleLoaders = (preProcessor) => {
   return [
@@ -61,8 +61,8 @@ const getStyleLoaders = (preProcessor) => {
     'css-loader',
     'postcss-loader',
     preProcessor,
-  ].filter(Boolean);
-};
+  ].filter(Boolean)
+}
 
 module.exports = {
   getStyleLoaders,
@@ -70,16 +70,16 @@ module.exports = {
   isDev,
   isAnalyz,
   isSmp,
-};
+}
 ```
 
 #### 5.2 创建 `webpack/webpack.common.js` 文件
 
 ```js
-const path = require('path');
-const { getStyleLoaders } = require('./utils.js');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const path = require('path')
+const { getStyleLoaders } = require('./utils.js')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   entry: ['babel-polyfill', path.resolve(__dirname, '../src/main.js')],
@@ -152,19 +152,19 @@ module.exports = {
     }),
     new VueLoaderPlugin(),
   ],
-};
+}
 ```
 
 #### 5.3 创建 `webpack/webpack.dev.js` 文件
 
 ```js
-const merge = require('webpack-merge');
-const { isSmp } = require('./utils.js');
-const common = require('./webpack.common.js');
-const webpack = require('webpack');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const merge = require('webpack-merge')
+const { isSmp } = require('./utils.js')
+const common = require('./webpack.common.js')
+const webpack = require('webpack')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
-const smp = new SpeedMeasurePlugin();
+const smp = new SpeedMeasurePlugin()
 
 const config = merge(common, {
   mode: 'development',
@@ -181,27 +181,27 @@ const config = merge(common, {
     },
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
-});
+})
 
-module.exports = isSmp ? smp.wrap(config) : config;
+module.exports = isSmp ? smp.wrap(config) : config
 ```
 
 #### 5.4 创建 `webpack/webpack.prod.js` 文件
 
 ```js
-const merge = require('webpack-merge');
-const path = require('path');
-const common = require('./webpack.common.js');
-const { isAnalyz, isSmp } = require('./utils.js');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const merge = require('webpack-merge')
+const path = require('path')
+const common = require('./webpack.common.js')
+const { isAnalyz, isSmp } = require('./utils.js')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
-const smp = new SpeedMeasurePlugin();
+const smp = new SpeedMeasurePlugin()
 
 const config = merge(common, {
   output: {
@@ -253,9 +253,9 @@ const config = merge(common, {
       test: /iview(.*?).js$/,
     }),
   ].filter(Boolean),
-});
+})
 
-module.exports = isSmp ? smp.wrap(config) : config;
+module.exports = isSmp ? smp.wrap(config) : config
 ```
 
 #### 5.5 创建 `.gitignore` 文件
@@ -296,7 +296,7 @@ module.exports = {
   htmlWhitespaceSensitivity: 'css',
   vueIndentScriptAndStyle: false,
   endOfLine: 'lf',
-};
+}
 ```
 
 #### 5.7 创建 `.prettierignore` 文件
@@ -318,7 +318,7 @@ module.exports = {
   plugins: {
     autoprefixer: {},
   },
-};
+}
 ```
 
 #### 5.9 创建 `.babelrc` 文件
@@ -377,20 +377,20 @@ npm run build
 #### 5.12 创建 `src/main.js` 文件
 
 ```js
-import { join } from 'lodash';
+import { join } from 'lodash'
 
 function component() {
-  var element = document.createElement('div');
+  var element = document.createElement('div')
 
-  element.innerHTML = join(['webpack', 'vue2', '实践'], '-');
+  element.innerHTML = join(['webpack', 'vue2', '实践'], '-')
 
-  return element;
+  return element
 }
 
-document.body.appendChild(component());
+document.body.appendChild(component())
 
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept()
 }
 ```
 
@@ -412,25 +412,25 @@ if (module.hot) {
 <script>
 export default {
   data() {
-    return {};
+    return {}
   },
   created() {
-    console.log('app');
+    console.log('app')
   },
-};
+}
 </script>
 ```
 
 #### 7.2 修改 `src/main.js` 文件
 
 ```js
-import Vue from 'vue';
-import App from './App';
+import Vue from 'vue'
+import App from './App'
 
 new Vue({
   el: '#app',
   render: (h) => h(App),
-});
+})
 ```
 
 #### 7.3 查看效果
@@ -446,37 +446,37 @@ new Vue({
 #### 8.1 创建 `src/router/index.js` 路由文件
 
 ```js
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import index from '@/pages/index';
-import aboutUs from '@/pages/aboutUs';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import index from '@/pages/index'
+import aboutUs from '@/pages/aboutUs'
 
 const routes = [
   { path: '/', redirect: '/index' },
   { path: '/index', name: 'index', component: index },
   { path: '/aboutUs', name: 'aboutUs', component: aboutUs },
-];
+]
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 export default new VueRouter({
   mode: 'hash',
   routes,
-});
+})
 ```
 
 #### 8.2 修改 `src/main.js` 文件
 
 ```js
-import Vue from 'vue';
-import App from './App';
-import router from './router';
+import Vue from 'vue'
+import App from './App'
+import router from './router'
 
 new Vue({
   el: '#app',
   router,
   render: (h) => h(App),
-});
+})
 ```
 
 #### 8.3 修改 `src/App.vue` 文件
@@ -493,12 +493,12 @@ new Vue({
 <script>
 export default {
   data() {
-    return {};
+    return {}
   },
   created() {
-    console.log('app');
+    console.log('app')
   },
-};
+}
 </script>
 ```
 
@@ -510,7 +510,7 @@ export default {
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 ```
 
@@ -522,7 +522,7 @@ export default {};
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 ```
 
@@ -568,7 +568,7 @@ export default new VueRouter({
 
 ## 10. 图片压缩
 
-首先，`url-loader` 和 `image-webpack-loader` 都依赖于 `file-loader`，`file-loader` 简言之就是一个资源加载模块，去找文件资源的loader，然后也可以给静态资源生成哈希值，即唯一标识身份证。一般不用配置。我们主要是通过`url-loader`和`image-webpack-loader`做相关对应项配置
+首先，`url-loader` 和 `image-webpack-loader` 都依赖于 `file-loader`，`file-loader` 简言之就是一个资源加载模块，去找文件资源的 loader，然后也可以给静态资源生成哈希值，即唯一标识身份证。一般不用配置。我们主要是通过`url-loader`和`image-webpack-loader`做相关对应项配置
 
 #### 10.1 安装依赖
 
@@ -576,52 +576,52 @@ export default new VueRouter({
 npm install -D file-loader@6 url-loader@4 image-webpack-loader@6
 ```
 
-#### 10.2 修改 `webpack/webpack.common.js` 
+#### 10.2 修改 `webpack/webpack.common.js`
 
 ```js
 module: {
-    rules: [
+  rules: [
+    {
+      test: /\.(png|jpe?g|gif|svg)$/i,
+      use: [
         {
-            test: /\.(png|jpe?g|gif|svg)$/i,
-            use: [
-                {
-                    loader: 'url-loader',
-                    options: {
-                        // 当文件大小小于limit byte时会把图片转换为base64编码的dataurl，否则返回普通的图片
-                        limit: 8192,
-                        name: 'images/[name].[contenthash:10].[ext]',
-                        esModule: false
-                    }
-                },
-                {
-                    loader: 'image-webpack-loader', // 压缩图片
-                    options: {
-                        mozjpeg: {
-                            //jpeg压缩
-                            progressive: true,
-                            quality: 65
-                        },
-                        gifsicle: {
-                            //gif压缩
-                            interlaced: true
-                        },
-                        optipng: {
-                            //png压缩
-                            enabled: true
-                        },
-                        pngquant: {
-                            //png压缩
-                            quality: [0.65, 0.9],
-                            speed: 4
-                        },
-                        webp: {
-                            quality: 60
-                        }
-                    }
-                }
-            ]
-        }
-    ]
+          loader: 'url-loader',
+          options: {
+            // 当文件大小小于limit byte时会把图片转换为base64编码的dataurl，否则返回普通的图片
+            limit: 8192,
+            name: 'images/[name].[contenthash:10].[ext]',
+            esModule: false,
+          },
+        },
+        {
+          loader: 'image-webpack-loader', // 压缩图片
+          options: {
+            mozjpeg: {
+              //jpeg压缩
+              progressive: true,
+              quality: 65,
+            },
+            gifsicle: {
+              //gif压缩
+              interlaced: true,
+            },
+            optipng: {
+              //png压缩
+              enabled: true,
+            },
+            pngquant: {
+              //png压缩
+              quality: [0.65, 0.9],
+              speed: 4,
+            },
+            webp: {
+              quality: 60,
+            },
+          },
+        },
+      ],
+    },
+  ]
 }
 ```
 
@@ -640,7 +640,7 @@ module.exports = {
 }
 ```
 
-#### 11.2 修改 `index.html` 
+#### 11.2 修改 `index.html`
 
 在入口文件 index.html 加入 vue 和 iview 对应的 cdn 文件
 
@@ -671,5 +671,3 @@ module.exports = {
   </body>
 </html>
 ```
-
-
