@@ -1,26 +1,8 @@
 # 自动格式化代码 Prettier
 
-## 方式一
-在 Vscode 编辑器每次保存代码时自动格式化代码
+## 创建格式化规则文件
 
-#### 1.安装 Vscode 插件 Prettier，并启用插件
-
-![img](../../../.vuepress/public/img/webp.webp)
-
-#### 2.在 Vscode 配置文件开启保存代码自动格式化配置
-
-```
-"editor.formatOnSave": true, // 保存代码时自动格式化代码
-"editor.defaultFormatter": "esbenp.prettier-vscode", //配置html css js的默认格式化程序
-```
-
-![image-20230425160316462](../../../.vuepress/public/img/image-20230425160316462.png)
-
-![image-20230425160341342](../../../.vuepress/public/img/image-20230425160341342.png)
-
-![image-20230425160400067](../../../.vuepress/public/img/image-20230425160400067.png)
-
-#### 3.在项目根目录下创建 `.prettierrc.js` 和 `.prettierignore` 两个文件
+#### 在项目根目录下创建 `.prettierrc.js` 和 `.prettierignore` 两个文件
 
 `.prettierrc.js` 配置格式化规则
 
@@ -55,6 +37,28 @@ coverage
 .husky
 .git
 ```
+
+## 方式一
+在 Vscode 编辑器每次保存代码时自动格式化代码
+
+#### 1.安装 Vscode 插件 Prettier，并启用插件
+
+![img](../../../.vuepress/public/img/webp.webp)
+
+#### 2.在 Vscode 配置文件开启保存代码自动格式化配置
+
+```
+"editor.formatOnSave": true, // 保存代码时自动格式化代码
+"editor.defaultFormatter": "esbenp.prettier-vscode", //配置html css js的默认格式化程序
+```
+
+![image-20230425160316462](../../../.vuepress/public/img/image-20230425160316462.png)
+
+![image-20230425160341342](../../../.vuepress/public/img/image-20230425160341342.png)
+
+![image-20230425160400067](../../../.vuepress/public/img/image-20230425160400067.png)
+
+
 
 ## 方式二
 每次提交代码时自动对提交的文件进行代码格式化
