@@ -27,6 +27,7 @@ const routes = [
       "/docs/webpack/webpack5-react18/antd",
       "/docs/webpack/webpack5-react18/router",
       "/docs/webpack/webpack5-react18/prettier",
+      "/docs/webpack/webpack5-react18/css_modules",
       ...getFileName("/webpack/webpack5-react18"),
     ])
   ),
